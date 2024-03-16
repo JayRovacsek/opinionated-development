@@ -30,6 +30,8 @@
 
 ### 🐛 Bug Fixes
 
+- *(flake)* Add standard-outputs to flake to resolve github workflow issue - ([8db642e](https://github.com/JayRovacsek/vulnix-pre-commit/commit/8db642e5d83f9f2c991cd29abbd6ac61941b3b5b))
+
 - *(flake)* Resolve duplicated inputs - ([aa3f791](https://github.com/JayRovacsek/vulnix-pre-commit/commit/aa3f7914cd009ec4ce530e1e3d7c2d20d3a50891))
 
 - *(package)* Resolve github checks value for pull_request - ([aa3f791](https://github.com/JayRovacsek/vulnix-pre-commit/commit/aa3f7914cd009ec4ce530e1e3d7c2d20d3a50891))

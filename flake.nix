@@ -147,8 +147,9 @@
 
       standard-output = {
         githubActions = self.inputs.nix-github-actions.lib.mkGithubMatrix {
-          checks = (lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks)
-            // (lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.packages);
+          checks = lib.recursiveUpdate
+            (lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks)
+            (lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.packages);
         };
       };
 
