@@ -30,6 +30,8 @@
 
 ### 🐛 Bug Fixes
 
+- *(flake)* Correct issue where merge clobbers pre-commit checks - ([0ad22ba](https://github.com/JayRovacsek/vulnix-pre-commit/commit/0ad22baa54b6f8f30fdcc066eada58766d4cd1cc))
+
 - *(flake)* Add standard-outputs to flake to resolve github workflow issue - ([8db642e](https://github.com/JayRovacsek/vulnix-pre-commit/commit/8db642e5d83f9f2c991cd29abbd6ac61941b3b5b))
 
 - *(flake)* Resolve duplicated inputs - ([aa3f791](https://github.com/JayRovacsek/vulnix-pre-commit/commit/aa3f7914cd009ec4ce530e1e3d7c2d20d3a50891))

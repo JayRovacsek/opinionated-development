@@ -89,7 +89,7 @@
                 };
 
                 trufflehog-verified = {
-                  enable = true;
+                  enable = pkgs.stdenv.isLinux;
                   name = "Trufflehog Search";
                   entry =
                     "${pkgs.trufflehog}/bin/trufflehog git file://. --since-commit HEAD --only-verified --fail --no-update";
@@ -98,7 +98,7 @@
                 };
 
                 trufflehog-regex = {
-                  enable = true;
+                  enable = pkgs.stdenv.isLinux;
                   name = "Trufflehog Regex Search";
                   entry =
                     "${pkgs.trufflehog}/bin/trufflehog git file://. --since-commit HEAD --config ${
