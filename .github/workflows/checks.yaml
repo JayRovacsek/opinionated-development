@@ -1,0 +1,32 @@
+jobs:
+  nix-build:
+    needs: nix-matrix
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: DeterminateSystems/nix-installer-action@main
+    - run: nix build -L ".#${{ matrix.attr }}"
+    strategy:
+      matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
+  nix-matrix:
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: DeterminateSystems/nix-installer-action@main
+    - id: set-matrix
+      name: Generate Nix Matrix
+      run: 'set -Eeu
+
+        matrix="$(nix eval --json ''.#githubActions.matrix'')"
+
+        echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+
+        '
+name: Nix Flake Checks
+'on':
+  pull_request: null
+  push:
+    branches:
+    - main

@@ -6,6 +6,7 @@ writeTextFile {
     .pre-commit-config.yaml
     *.nix
     CHANGELOG.md
+    checks.yaml
     result
   '';
 }

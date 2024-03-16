@@ -3,7 +3,7 @@ writers.writeYAML "checks.yaml" {
   name = "Nix Flake Checks";
 
   on = {
-    pull_request = "";
+    pull_request = null;
     push.branches = [ "main" ];
   };
 

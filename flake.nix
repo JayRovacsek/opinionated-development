@@ -19,6 +19,7 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = {
+        flake-utils.follows = "flake-utils";
         gitignore.follows = "gitignore";
         nixpkgs.follows = "nixpkgs";
       };
