@@ -1,0 +1,40 @@
+{ writers, ... }:
+writers.writeYAML "checks.yaml" {
+  name = "Nix Flake Checks";
+
+  on = {
+    pull_request = null;
+    push.branches = [ "main" ];
+  };
+
+  jobs = {
+    nix-matrix = {
+      runs-on = "ubuntu-latest";
+      outputs.matrix = "\${{ steps.set-matrix.outputs.matrix }}";
+      steps = [
+        { uses = "actions/checkout@v4"; }
+        { uses = "DeterminateSystems/nix-installer-action@main"; }
+        {
+          id = "set-matrix";
+          name = "Generate Nix Matrix";
+          run = ''
+            set -Eeu
+            matrix="$(nix eval --json '.#githubActions.matrix')"
+            echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          '';
+        }
+      ];
+    };
+
+    nix-build = {
+      needs = "nix-matrix";
+      runs-on = "\${{ matrix.os }}";
+      strategy.matrix = "\${{fromJSON(needs.nix-matrix.outputs.matrix)}}";
+      steps = [
+        { uses = "actions/checkout@v4"; }
+        { uses = "DeterminateSystems/nix-installer-action@main"; }
+        { run = ''nix build -L ".#''${{ matrix.attr }}"''; }
+      ];
+    };
+  };
+}
