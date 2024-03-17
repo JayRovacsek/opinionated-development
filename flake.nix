@@ -128,6 +128,7 @@
 
           devShells.default = pkgs.mkShell {
             name = "opinionated-development-dev-shell";
+            packages = with pkgs; [ pre-commit ];
             inherit (self.checks.${system}.pre-commit-check) shellHook;
           };
 
@@ -151,6 +152,8 @@
             (lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks)
             (lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.packages);
         };
+
+        lib = import ./lib { inherit self; };
       };
 
     in flake-utils-output // standard-output;
